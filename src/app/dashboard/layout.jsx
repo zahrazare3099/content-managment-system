@@ -5,11 +5,11 @@ import { ShowEditorUser } from "../_components/EditorUser";
 const Layout = ({ children }) => {
   return (
     <>
-      <div className="flex bg-zinc-300 p-3 justify-between items-center">
-        <SelectedTab />
+      <div className="flex justify-between items-center bg-slate-100 p-3  ">
         <ShowEditorUser />
+        <SelectedTab />
       </div>
-      {children}
+      <div className="p-3">{children}</div>
     </>
   );
 };

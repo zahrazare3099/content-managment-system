@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div className="flex flex-col gap-4">home page</div>;
+  return <div className="p-3">home page</div>;
 }

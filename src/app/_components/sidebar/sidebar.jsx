@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Logo } from "../logo/index";
 export const Sidebar = () => {
   return (
-    <aside className="bg-slate-700 p-5 w-2/5 flex flex-col ">
+    <aside className="bg-slate-300 text-slate-700 p-5 w-1/5 flex flex-col ">
       <Logo />
       <ul className="space-y-2 py-4">
         <li>

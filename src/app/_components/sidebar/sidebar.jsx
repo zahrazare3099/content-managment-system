@@ -3,7 +3,7 @@ import { Logo } from "../logo/index";
 
 const items = [
   { name: "Home", id: 1, href: "/" },
-  { name: "Dashboard", id: 2, href: "/dashboard" },
+  { name: "Dashboard", id: 2, href: "/dashboard/create" },
   { name: "Setting", id: 3, href: "/setting" },
 ];
 export const Sidebar = () => {

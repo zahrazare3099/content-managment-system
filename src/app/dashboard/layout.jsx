@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import { SelectedTab } from "../_components/selectedTab";
 import { ShowEditorUser } from "../_components/EditorUser";
 

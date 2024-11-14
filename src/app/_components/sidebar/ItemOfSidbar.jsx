@@ -10,7 +10,7 @@ const ItemOfSidbar = ({ name, href }) => {
     <li>
       <Link
         className={`${
-          pathname == href ? activePath : ""
+          pathname == href || pathname.includes(href) ? activePath : ""
         } hover:bg-slate-400 flex p-2 rounded-xl text-sm`}
         href={href}
       >

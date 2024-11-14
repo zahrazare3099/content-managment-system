@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const items = [
   { name: "Create New Post", id: 1, path: "/dashboard/create" },
@@ -8,11 +10,14 @@ const items = [
   { name: "Processing", id: 4, path: "/dashboard/processing" },
 ];
 export const SelectedTab = () => {
+  const path = usePathname();
   return (
     <div className="p-1 flex flex-wrap justify-end gap-x-2 gap-y-1">
       {items.map((item) => (
         <Link
-          className="border px-2 py-1 text-sm rounded-lg bg-slate-300"
+          className={`border px-2 py-1 text-sm rounded-lg ${
+            path == item.path ? "bg-slate-400" : "bg-slate-300"
+          }`}
           key={item.id}
           href={`${item.path}`}
         >

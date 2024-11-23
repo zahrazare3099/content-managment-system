@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const items = [
-  { name: "Create New Post", id: 1, path: "/dashboard/create" },
+  { name: "Create New Post", id: 1, path: "/dashboard" },
   { name: "Edit Post", id: 5, path: "/dashboard/edit" },
   { name: "Raw Posts", id: 2, path: "/dashboard/showInRaw" },
   { name: "Published Posts", id: 3, path: "/dashboard/publishedPosts" },
@@ -11,12 +11,13 @@ const items = [
 ];
 export const SelectedTab = () => {
   const path = usePathname();
+
   return (
-    <div className="p-1 flex flex-wrap justify-end gap-x-2 gap-y-1">
+    <div className="flex flex-wrap justify-end gap-x-2 gap-y-1">
       {items.map((item) => (
         <Link
-          className={`border px-2 py-1 text-sm rounded-lg ${
-            path == item.path ? "bg-slate-400" : "bg-slate-300"
+          className={`px-2 py-1 text-sm rounded-lg ${
+            path == item.path ? "bg-indigo-400" : "bg-slate-300"
           }`}
           key={item.id}
           href={`${item.path}`}

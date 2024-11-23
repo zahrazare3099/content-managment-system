@@ -4,14 +4,14 @@ import { usePathname } from "next/navigation";
 
 const ItemOfSidbar = ({ name, href }) => {
   const pathname = usePathname();
-  const activePath = "bg-slate-500 text-white font-bold";
+  const activePath = "bg-indigo-400 text-white font-bold";
 
   return (
     <li>
       <Link
         className={`${
-          pathname == href || pathname.includes(href) ? activePath : ""
-        } hover:bg-slate-400 flex p-2 rounded-xl text-sm`}
+          pathname.startsWith(href) || pathname == href ? activePath : ""
+        } hover:bg-indigo-300 flex p-2 rounded-xl text-sm`}
         href={href}
       >
         {name}

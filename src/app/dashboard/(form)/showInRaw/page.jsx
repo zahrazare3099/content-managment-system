@@ -3,7 +3,6 @@ import { useDataContext } from "@/context/DataProvider";
 
 const ShowInRaw = () => {
   const { data } = useDataContext();
-  console.log("on raw", data);
 
   return (
     <div className="p-5 grid grid-cols-2 gap-3">

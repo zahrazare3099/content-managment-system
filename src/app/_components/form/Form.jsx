@@ -15,7 +15,7 @@ const contentItems = [
 ];
 
 export const Form = () => {
-  const { setData, data } = useDataContext();
+  const { setData } = useDataContext();
   // To store submitted data
   const [inputs, setInputs] = useState([]);
   const [title, setTitle] = useState("");

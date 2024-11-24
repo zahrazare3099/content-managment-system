@@ -18,7 +18,7 @@ export default DataProvider;
 export const useDataContext = () => {
   const result = useContext(DataContext);
   if (result === undefined) {
-    return new Error("outside of the context");
+    return console.error("outside of the context");
   }
   return result;
 };

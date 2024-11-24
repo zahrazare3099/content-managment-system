@@ -1,5 +1,6 @@
 import { SelectedTab } from "../_components/selectedTab";
 import { ShowEditorUser } from "../_components/EditorUser";
+import DataProvider from "@/context/DataProvider";
 
 const Layout = ({ children }) => {
   return (
@@ -8,7 +9,9 @@ const Layout = ({ children }) => {
         <ShowEditorUser />
         <SelectedTab />
       </div>
-      <div className="p-3">{children}</div>
+      <DataProvider>
+        <div className="p-3">{children}</div>
+      </DataProvider>
     </>
   );
 };

@@ -1,9 +1,6 @@
+import { Form } from "@/app/_components/form/Form";
+
 const CreatePost = () => {
-  return (
-    <div>
-      <h1>Create Page</h1>
-      <p>This is the create page.</p>
-    </div>
-  );
+  return <Form />;
 };
 export default CreatePost;

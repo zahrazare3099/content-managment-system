@@ -4,7 +4,7 @@ export const Button = ({ name, type = "submit" }) => {
   return (
     <button
       type={type}
-      className={`py-2 my-4 rounded-xl text-sm font-bold text-white ${
+      className={`w-9/12 py-2 my-4 rounded-xl text-sm font-bold text-white ${
         type == "submit"
           ? "bg-indigo-700"
           : type == "edit"

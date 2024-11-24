@@ -1,11 +1,4 @@
-export const Input = ({
-  name,
-  label,
-  value,
-  onChange,
-  errors = "",
-  type = "text",
-}) => {
+export const Input = ({ name, label, value, onChange, type = "text" }) => {
   return (
     <div className="flex flex-col gap-1 justify-center w-9/12">
       <label htmlFor={name} className="px-2 font-serif text-slate-800">

@@ -36,7 +36,9 @@ export const Form = () => {
         ...preData,
         { title, subTitle, id: Date.now(), ...additionInputs },
       ]);
-      setTitle(""), setSubTitle(""), setInputs([]);
+      setTitle("");
+      setSubTitle("");
+      setInputs([]);
       setcontrolInput(null);
     } else return;
 
@@ -58,8 +60,8 @@ export const Form = () => {
         {contentItems.map((item, index) => (
           <button
             onClick={() => {
-              handleAddContent(index + 1, item.label),
-                setcontrolInput(index + 1);
+              handleAddContent(index + 1, item.label);
+              setcontrolInput(index + 1);
             }}
             key={item.id}
             className="bg-slate-300 py-1 px-2 rounded-xl text-sm hover:outline-2 hover:outline hover:outline-indigo-400 "

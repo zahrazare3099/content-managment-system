@@ -2,7 +2,7 @@ import ItemOfSidbar from "./ItemOfSidbar";
 import { Logo } from "../logo/index";
 
 const items = [
-  { name: "Home", id: 1, href: "/home" },
+  { name: "Home", id: 1, href: "/" },
   { name: "Dashboard", id: 2, href: "/dashboard" },
   { name: "Setting", id: 3, href: "/setting" },
 ];

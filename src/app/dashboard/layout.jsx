@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
         <SelectedTab />
       </div>
       <DataProvider>
-        <div className="p-3">{children}</div>
+        <div className="layout_from_dashboard p-3">{children}</div>
       </DataProvider>
     </>
   );

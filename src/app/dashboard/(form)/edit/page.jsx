@@ -1,5 +1,5 @@
 const EditPost = () => {
-  return <>edit post</>;
+  return null;
 };
 
 export default EditPost;

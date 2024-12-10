@@ -1,5 +1,9 @@
 const PublishedPosts = () => {
-  return <>Published Posts</>;
+  return (
+    <div>
+      <h1>Published Posts</h1>
+    </div>
+  );
 };
 
 export default PublishedPosts;

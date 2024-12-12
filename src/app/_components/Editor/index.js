@@ -32,7 +32,6 @@ import BulletList from "@tiptap/extension-bullet-list";
 import OrderedList from "@tiptap/extension-ordered-list";
 import Strike from "@tiptap/extension-strike";
 import TextAlign from "@tiptap/extension-text-align";
-import TextDirection from "tiptap-text-direction";
 
 export {
   StarterKit,
@@ -44,7 +43,6 @@ export {
   OrderedList,
   Strike,
   TextAlign,
-  TextDirection,
 };
 
 export * from "./Editor.jsx";

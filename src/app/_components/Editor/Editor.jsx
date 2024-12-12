@@ -40,18 +40,6 @@ export const EditorComponent = ({ content }) => {
           class: "strike", // Custom class for strikethrough
         },
       }),
-      TipTap.TextDirection.configure({
-        types: [
-          "heading",
-          "paragraph",
-          "link",
-          "span",
-          "bulletList",
-          "orderedList",
-          "listItem",
-        ],
-        defaultDirection: "rtl", // Set default direction if needed
-      }),
     ],
     content,
   });

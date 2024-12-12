@@ -16,7 +16,7 @@ const BASE_URL = "https://vowvojtiieentuwelxkg.supabase.co/rest/v1/";
 //   apiKey: process.env.API_SECRET_KEY,
 // };
 
-const useFetch = ({ key = "" }) => {
+const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
   const [data, setData] = useState([]);
   const [singlePost, setSinglePost] = useState([]);
   const [elements, setElements] = useState([]);
@@ -63,15 +63,44 @@ const useFetch = ({ key = "" }) => {
     }
   };
   // create post
-  const createPost = async () => {
+  const createPost = async (postData) => {
     try {
       const response = await fetch(`${BASE_URL}posts`, {
         headers,
         method: "POST",
-        body: JSON.stringify({}),
+        body: JSON.stringify(postData),
       });
-      const result = await response.json();
-      setcreatePostItem(result);
+      if (response.ok) {
+        console.log("Form submitted successfully:", data);
+        const jsonData = await response.json();
+        console.log("jsonData", jsonData);
+      }
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setloading(false);
+      setError(false);
+    }
+  };
+  // create Element
+  const creatElement = async (elementData) => {
+    try {
+      const response = await fetch(`${BASE_URL}elements`, {
+        headers,
+        method: "POST",
+        body: JSON.stringify(elementData),
+      });
+      if (response.ok) {
+        console.log("Form submitted successfully:", data);
+        const jsonData = await response.json();
+        console.log("jsonData", jsonData);
+      }
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -133,6 +162,8 @@ const useFetch = ({ key = "" }) => {
     GetPostBYID();
     GetPostElementsByIdeng();
     GetPostElementsByIdIR();
+    createPost(postData);
+    creatElement(elementDta);
   }, []);
   return {
     data,
@@ -141,6 +172,8 @@ const useFetch = ({ key = "" }) => {
     persianPostElements,
     englishPostElements,
     loading,
+    createPost,
+    creatElement,
   };
 };
 

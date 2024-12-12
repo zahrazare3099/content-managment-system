@@ -1,68 +1,128 @@
 "use client";
-import { useState } from "react";
-import { Input } from "../input/Input";
+import { CustomInput } from "../input/CustomInput";
 import { Button } from "../button/Button";
 import { AddMoreContent } from "../AddMoreContent";
-import { useDataContext } from "@/context/DataProvider";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { v4 as uuidv4 } from "uuid";
+import { useEffect } from "react";
+import useFetch from "@/hook/useFetch";
 
 const contentItems = [
-  { label: "Header", id: 1 },
-  { label: "Paragragh", id: 2 },
-  { label: "Image", id: 3 },
-  { label: "Video", id: 4 },
-  { label: "Ouote", id: 5 },
-  { label: "Code", id: 6 },
+  { type: "h1", label: "H1", id: "01" },
+  { type: "h2", label: "H2", id: "02" },
+  { type: "h3", label: "H3", id: "03" },
+  { type: "p", label: "Paragragh", id: "04" },
+  { type: "Image", label: "Image", id: "05" },
+  { type: "Video", label: "Video", id: "06" },
 ];
 
+// Define validation schema using Zod
+const PostSchema = z.object({
+  title: z.string().min(1, "تیتر ضروری است"),
+  pre_title: z.string().min(1, "پیشوند تیتر ضروری است"),
+  post_title: z.string().min(1, "تیتر پست ضروری است"),
+  author: z
+    .string()
+    .email("ایمیل وارد شده معتبر نیست")
+    .min(1, "ایمیل ضروری است"),
+});
+const ElementSchema = z.object({
+  type: z.string(),
+  text: z.string().min(1, "وارد کردن محتوا ضروری است"),
+  index: z.string(),
+  id: z.string(),
+  post_id: z.string(),
+  created_at: z.string(),
+  data: z.any().nullable(),
+  original_element_id: z.string(),
+});
+//
+const post_id = uuidv4();
+//
 export const Form = () => {
-  const { setData } = useDataContext();
-  // To store submitted data
-  const [inputs, setInputs] = useState([]);
-  const [title, setTitle] = useState("");
-  const [subTitle, setSubTitle] = useState("");
-  const [controlInput, setcontrolInput] = useState(null);
-  //
-  const handleSubmitform = (e) => {
-    e.preventDefault();
-    // Create an object from the inputs
-    const additionInputs = inputs?.map((input) => ({
-      label: input.label,
-      value: input.value,
-      id: Date.now(),
-    }));
-    // Send data to an API or process it as needed
-    if (title && subTitle) {
-      setData((preData) => [
-        ...preData,
-        { title, subTitle, id: Date.now(), ...additionInputs },
-      ]);
-      setTitle("");
-      setSubTitle("");
-      setInputs([]);
-      setcontrolInput(null);
-    } else return;
-
-    // console.log("Submitted Data:", data);
-  };
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+  } = useForm({
+    resolver: zodResolver(
+      z.object({
+        posts: PostSchema,
+        elements: ElementSchema.array(),
+      })
+    ),
+    defaultValues: {
+      posts: {
+        title: "",
+        pre_title: "",
+        post_title: "",
+        author: "",
+      },
+      elements: [],
+    },
+    mode: "onChange",
+  });
+  const { createPost, creatElement } = useFetch({ key: "", postData: {} });
+  // inputs from elements
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "elements",
+  });
   // Function to handle adding new input fields
-  const handleAddContent = (id, label) => {
-    setInputs([...inputs, { label, value: "", id }]);
+  const handleAddContent = (type) => {
+    append({
+      type,
+      text: "",
+      index: String(fields.length),
+      id: uuidv4(),
+      post_id: post_id,
+      created_at: new Date().toISOString(),
+      data: null,
+      original_element_id: uuidv4(),
+    });
   };
-  // Function to handle input changes
-  const handleInputChange = (index, event) => {
-    const newInputs = [...inputs];
-    newInputs[index].value = event.target.value;
-    setInputs(newInputs);
+  // Combined submit handler
+  const onSubmit = async (data) => {
+    await onSubmitPosts(data.posts);
+    await onSubmitElements(data.elements);
+    reset();
   };
+  // handle submit posts
+  const onSubmitPosts = async (data) => {
+    const newData = {
+      ...data,
+      id: post_id,
+      created_at: new Date().toISOString(),
+      reviewed: false,
+      published: false,
+      original_post_id: uuidv4(),
+    };
+    console.log("new data onSubmitPosts", newData);
+    await createPost(newData);
+  };
+  // handle submit elements
+  const onSubmitElements = async (data) => {
+    console.log("onSubmitElements", data);
+    await creatElement(data);
+  };
+
+  //
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
+
   return (
-    <div className="w-full flex flex-col gap-y-4">
+    <div className="w-full flex flex-col gap-y-4" dir="rtl">
       <AddMoreContent>
-        {contentItems.map((item, index) => (
+        {contentItems.map((item) => (
           <button
-            onClick={() => {
-              handleAddContent(index + 1, item.label);
-              setcontrolInput(index + 1);
-            }}
+            type="button"
+            onClick={() => handleAddContent(item.type)}
             key={item.id}
             className="bg-slate-300 py-1 px-2 rounded-xl text-sm hover:outline-2 hover:outline hover:outline-indigo-400 "
           >
@@ -71,86 +131,78 @@ export const Form = () => {
         ))}
       </AddMoreContent>
       <form
-        onSubmit={handleSubmitform}
-        className="w-full flex flex-col justify-center gap-4"
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-9/12 flex flex-col justify-center gap-4"
       >
-        <Input
-          name={title}
-          label="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+        <Controller
+          name="posts.title"
+          control={control}
+          render={({ field }) => (
+            <CustomInput {...field} label="تیتر" error={errors.posts?.title} />
+          )}
         />
-        <Input
-          name={subTitle}
-          label="Sub-Title"
-          value={subTitle}
-          onChange={(e) => setSubTitle(e.target.value)}
-        />
-        {controlInput &&
-          inputs.map((input, index) => (
-            <Input
-              key={index}
-              label={`${input.label}-${index + 1}`}
-              value={input.value}
-              onChange={(e) => {
-                handleInputChange(index, e);
-              }}
+        <Controller
+          name="posts.pre_title"
+          control={control}
+          render={({ field }) => (
+            <CustomInput
+              {...field}
+              label="پیشوند تیتر"
+              error={errors.posts?.pre_title}
             />
-          ))}
-        <Button type="submit" name="submit" />
+          )}
+        />
+        <Controller
+          name="posts.post_title"
+          control={control}
+          render={({ field }) => (
+            <CustomInput
+              {...field}
+              label="تیتر پست"
+              error={errors.posts?.post_title}
+            />
+          )}
+        />
+        <Controller
+          name="posts.author"
+          control={control}
+          render={({ field }) => (
+            <CustomInput
+              {...field}
+              label="ایمیل نویسنده پست"
+              error={errors.posts?.author}
+            />
+          )}
+          rules={{ required: true }}
+        />
+        {fields.map((item, index) => (
+          <div key={item.id} className="flex flex-col gap-y-2">
+            <Controller
+              name={`elements.${index}.text`}
+              control={control}
+              render={({ field }) => (
+                <CustomInput
+                  {...field}
+                  label={`محتوا برای تگ ${item.type}`}
+                  error={errors.elements?.[index]?.text}
+                />
+              )}
+            />
+            <button
+              type="button"
+              onClick={() => remove(index)}
+              className="bg-red-500 text-white rounded-xl p-1 max-w-16 text-xs"
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+        <Button
+          type="submit"
+          name={isSubmitting ? "Submitting..." : "Submit"}
+          disabled={isSubmitting}
+        />
       </form>
     </div>
   );
 };
-
-{
-  /* <div className="upload">
-        {!preview && (
-          <button type="button" onClick={triggerFileInput}>
-            Upload Image
-          </button>
-        )}
-
-        {preview && (
-          <div className="preview">
-            <Image
-              src={preview}
-              className="img"
-              alt="profilePicture"
-              height={50}
-              width={50}
-            />
-
-            <div className="buttons">
-              <button type="button" onClick={triggerFileInput}>
-                Change Image
-              </button>
-
-              <button type="button" onClick={removeImage}>
-                Remove Image
-              </button>
-            </div>
-          </div>
-        )}
-        <input
-          {...register("image")}
-          ref={hiddenFileInputRef}
-          hidden
-          type="file"
-          onChange={handleFileChange}
-        />
-        <p className="error">{errors.image && errors.image.message}</p>
-      </div> */
-}
-
-// Example of sending data to an API
-// const response = await fetch('/api/submit', {
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(submittedData),
-// });
-
-// const result = await response.json();
-// console.log(result);

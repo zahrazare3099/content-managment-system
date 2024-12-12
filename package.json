@@ -30,6 +30,7 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.2",
     "tiptap-text-direction": "^0.3.1",
+    "uuid": "^11.0.3",
     "zod": "^3.23.8"
   },
   "devDependencies": {

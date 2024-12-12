@@ -23,7 +23,6 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
   const [persianPostElements, setPersianPostElements] = useState([]);
   const [englishPostElements, setEnglishPostElements] = useState([]);
   const [loading, setloading] = useState(true);
-  const [error, setError] = useState(null);
   const [createPostItem, setcreatePostItem] = useState([]);
 
   // getData
@@ -38,7 +37,6 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
       console.error(error);
     } finally {
       setloading(false);
-      setError(false);
     }
   };
   // Get Post BY ID
@@ -59,7 +57,6 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
       console.error(error);
     } finally {
       setloading(false);
-      setError(false);
     }
   };
   // create post
@@ -82,7 +79,6 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
       console.error(error);
     } finally {
       setloading(false);
-      setError(false);
     }
   };
   // create Element
@@ -105,7 +101,6 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
       console.error(error);
     } finally {
       setloading(false);
-      setError(false);
     }
   };
   // Get Elements
@@ -120,7 +115,6 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
       console.error(error);
     } finally {
       setloading(false);
-      setError(false);
     }
   };
   // Get Post Elements By Id english elements
@@ -135,7 +129,6 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
       console.error(error);
     } finally {
       setloading(false);
-      setError(false);
     }
   };
   // Get Post Elements By Id persian elements
@@ -153,7 +146,6 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
       console.error(error);
     } finally {
       setloading(false);
-      setError(false);
     }
   };
   useEffect(() => {

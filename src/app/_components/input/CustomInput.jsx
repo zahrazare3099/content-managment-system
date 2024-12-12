@@ -2,9 +2,9 @@
 import React from "react";
 
 export const CustomInput = React.forwardRef(
-  ({ error, label, onChange, value }, ref) => (
+  ({ error, label, onChange, value, name }, ref) => (
     <div className="flex flex-col gap-1 justify-center w-full">
-      <label htmlFor={label} className="px-2 font-serif text-slate-800">
+      <label htmlFor={name} className="px-2 font-serif text-slate-800">
         {label}
       </label>
       <textarea

@@ -9,6 +9,7 @@ export const CustomInput = React.forwardRef(
       </label>
       <textarea
         ref={ref}
+        name={name}
         onChange={onChange}
         value={value}
         rows={1}

@@ -92,17 +92,15 @@ export const EditorComponent = ({ content }) => {
     const handleUpdate = () => {
       updateDirection();
     };
-
     if (editor) {
       editor.on("update", handleUpdate); // Listen for updates in the editor
     }
-
     return () => {
       if (editor) {
         editor.off("update", handleUpdate); // Clean up listener on unmount
       }
     };
-  }, [editor]);
+  }, [editor, updateDirection]);
 
   return (
     <div className="parentEditor w-full flex flex-col bg-slate-300 rounded-lg">

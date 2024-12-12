@@ -23,7 +23,6 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
   const [persianPostElements, setPersianPostElements] = useState([]);
   const [englishPostElements, setEnglishPostElements] = useState([]);
   const [loading, setloading] = useState(true);
-  const [createPostItem, setcreatePostItem] = useState([]);
 
   // getData
   const GetData = async () => {

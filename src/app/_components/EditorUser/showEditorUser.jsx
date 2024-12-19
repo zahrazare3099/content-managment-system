@@ -8,6 +8,7 @@ export const ShowEditorUser = () => {
           src="/images/user.png"
           alt="Picture of the author"
           fill
+          sizes=""
           style={{ objectFit: "contain" }}
         />
       </div>

@@ -6,8 +6,8 @@ import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect } from "react";
-import useFetch from "@/hook/useFetch";
+import { useEffect, useState } from "react";
+import usePost from "@/hook/usePost";
 
 const contentItems = [
   { type: "h1", label: "H1", id: "01" },
@@ -33,15 +33,13 @@ const ElementSchema = z.object({
   text: z.string().min(1, "وارد کردن محتوا ضروری است"),
   index: z.string(),
   id: z.string(),
-  post_id: z.string(),
   created_at: z.string(),
   data: z.any().nullable(),
-  original_element_id: z.string(),
 });
 //
-const post_id = uuidv4();
-//
 export const Form = () => {
+  const [postData, setPostData] = useState(null);
+  const [elementData, setElementData] = useState(null);
   const {
     control,
     handleSubmit,
@@ -65,7 +63,9 @@ export const Form = () => {
     },
     mode: "onChange",
   });
-  const { createPost, creatElement } = useFetch({ key: "", postData: {} });
+  const { createPost, creatElement } = usePost({ elementData, postData });
+  console.log(postData, elementData);
+
   // inputs from elements
   const { fields, append, remove } = useFieldArray({
     control,
@@ -78,10 +78,8 @@ export const Form = () => {
       text: "",
       index: String(fields.length),
       id: uuidv4(),
-      post_id: post_id,
       created_at: new Date().toISOString(),
       data: null,
-      original_element_id: uuidv4(),
     });
   };
   // Combined submit handler
@@ -92,20 +90,18 @@ export const Form = () => {
   };
   // handle submit posts
   const onSubmitPosts = async (data) => {
-    const newData = {
+    const newPost = {
       ...data,
-      id: post_id,
       created_at: new Date().toISOString(),
       reviewed: false,
       published: false,
-      original_post_id: uuidv4(),
     };
-    console.log("new data onSubmitPosts", newData);
-    await createPost(newData);
+    setPostData(newPost);
+    await createPost(newPost);
   };
   // handle submit elements
   const onSubmitElements = async (data) => {
-    console.log("onSubmitElements", data);
+    setElementData(data);
     await creatElement(data);
   };
 

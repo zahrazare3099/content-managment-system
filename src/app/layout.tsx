@@ -1,18 +1,50 @@
 import type { Metadata } from "next";
+import { Figtree } from "next/font/google";
 import localFont from "next/font/local";
 import { Header } from "./_components/header";
 import { Sidebar } from "./_components/sidebar";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const figtree = Figtree({
+  display: "swap",
+  subsets: ["latin"],
+  variable: "--font-figtree",
+  weight: ["300", "400", "500", "600", "700", "700", "800", "900"],
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const yekanbakh = localFont({
+  src: [
+    {
+      path: "../../public/fonts/yekanbakh/YekanBakh-Thin.woff2",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/yekanbakh/YekanBakh-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/yekanbakh/YekanBakh-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/yekanbakh/YekanBakh-Medium.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/yekanbakh/YekanBakh-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/yekanbakh/YekanBakh-Fat.woff2",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-yekanbakh",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr">
       <body
-        className={`min-h-screen flex bg-slate-200 ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`min-h-screen flex bg-slate-200 ${yekanbakh.variable} ${figtree.variable} antialiased`}
       >
         <Sidebar />
         <div className="flex flex-col w-full">

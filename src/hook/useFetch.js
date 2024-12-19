@@ -16,7 +16,7 @@ const BASE_URL = "https://vowvojtiieentuwelxkg.supabase.co/rest/v1/";
 //   apiKey: process.env.API_SECRET_KEY,
 // };
 
-const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
+const useFetch = ({ key = "" }) => {
   const [data, setData] = useState([]);
   const [singlePost, setSinglePost] = useState([]);
   const [elements, setElements] = useState([]);
@@ -40,67 +40,24 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
   };
   // Get Post BY ID
   const GetPostBYID = async () => {
-    try {
-      const response = await fetch(
-        `${BASE_URL}posts?or=(id.eq.${key},original_post_id.eq.${key})`,
-        {
-          headers,
-        }
-      );
-      // setTimeout(async () => {
+    if (key)
+      try {
+        const response = await fetch(
+          `${BASE_URL}posts?or=(id.eq.${key},original_post_id.eq.${key})`,
+          {
+            headers,
+          }
+        );
+        // setTimeout(async () => {
 
-      // }, 2000);
-      const result = await response.json();
-      setSinglePost(result);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setloading(false);
-    }
-  };
-  // create post
-  const createPost = async (postData) => {
-    try {
-      const response = await fetch(`${BASE_URL}posts`, {
-        headers,
-        method: "POST",
-        body: JSON.stringify(postData),
-      });
-      if (response.ok) {
-        console.log("Form submitted successfully:", data);
-        const jsonData = await response.json();
-        console.log("jsonData", jsonData);
+        // }, 2000);
+        const result = await response.json();
+        setSinglePost(result);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setloading(false);
       }
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setloading(false);
-    }
-  };
-  // create Element
-  const creatElement = async (elementData) => {
-    try {
-      const response = await fetch(`${BASE_URL}elements`, {
-        headers,
-        method: "POST",
-        body: JSON.stringify(elementData),
-      });
-      if (response.ok) {
-        console.log("Form submitted successfully:", data);
-        const jsonData = await response.json();
-        console.log("jsonData", jsonData);
-      }
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setloading(false);
-    }
   };
   // Get Elements
   const GetElements = async () => {
@@ -118,34 +75,36 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
   };
   // Get Post Elements By Id english elements
   const GetPostElementsByIdeng = async () => {
-    try {
-      const response = await fetch(`${BASE_URL}elements?post_id=eq.${key}`, {
-        headers,
-      });
-      const result = await response.json();
-      setEnglishPostElements(result);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setloading(false);
-    }
+    if (key)
+      try {
+        const response = await fetch(`${BASE_URL}elements?post_id=eq.${key}`, {
+          headers,
+        });
+        const result = await response.json();
+        setEnglishPostElements(result);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setloading(false);
+      }
   };
   // Get Post Elements By Id persian elements
   const GetPostElementsByIdIR = async () => {
-    try {
-      const response = await fetch(
-        `${BASE_URL}elements?post_id=eq.${Number(key) + 1}`,
-        {
-          headers,
-        }
-      );
-      const result = await response.json();
-      setPersianPostElements(result);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setloading(false);
-    }
+    if (key)
+      try {
+        const response = await fetch(
+          `${BASE_URL}elements?post_id=eq.${Number(key) + 1}`,
+          {
+            headers,
+          }
+        );
+        const result = await response.json();
+        setPersianPostElements(result);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setloading(false);
+      }
   };
   useEffect(() => {
     GetData();
@@ -153,8 +112,6 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
     GetPostBYID();
     GetPostElementsByIdeng();
     GetPostElementsByIdIR();
-    createPost(postData);
-    creatElement(elementDta);
   }, []);
   return {
     data,
@@ -163,8 +120,6 @@ const useFetch = ({ key = "", postData = {}, elementDta = {} }) => {
     persianPostElements,
     englishPostElements,
     loading,
-    createPost,
-    creatElement,
   };
 };
 

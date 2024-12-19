@@ -70,7 +70,7 @@ const CreatePost = ({ postData, elementData }) => {
   useEffect(() => {
     createPost(postData);
     creatElement(elementData);
-  }, []);
+  }, [postData, elementData]);
   return { createPost, creatElement };
 };
 

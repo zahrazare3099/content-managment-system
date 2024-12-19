@@ -69,38 +69,37 @@ export const EditorComponent = ({ content }) => {
     const persianRegex = /[\u0600-\u06FF]/; // Persian Unicode range
     return persianRegex.test(text);
   };
-  // Function to update direction based on content
-  const updateDirection = () => {
-    if (editor) {
-      const text = editor.getText(); // Get current plain text content
-      const isTextPersian = isPersian(text); // Determine if text is Persian
 
-      // Set direction for the editor container
-      const direction = isTextPersian ? "rtl" : "ltr";
-      document.querySelector(".ProseMirror").setAttribute("dir", direction);
-
-      // Update list styles based on detected language
-      const lists = document.querySelectorAll("ol, ul");
-      lists.forEach((list) => {
-        list.style.direction = direction; // Set direction for each list
-        list.style.textAlign = isTextPersian ? "right" : "left"; // Align text accordingly
-      });
-    }
-  };
   useEffect(() => {
-    // Update direction when content changes
-    const handleUpdate = () => {
-      updateDirection();
+    // Function to update direction based on content
+    const updateDirection = () => {
+      if (editor) {
+        const text = editor.getText(); // Get current plain text content
+        const isTextPersian = isPersian(text); // Determine if text is Persian
+
+        // Set direction for the editor container
+        const direction = isTextPersian ? "rtl" : "ltr";
+        document.querySelector(".ProseMirror").setAttribute("dir", direction);
+
+        // Update list styles based on detected language
+        const lists = document.querySelectorAll("ol, ul");
+        lists.forEach((list) => {
+          list.style.direction = direction; // Set direction for each list
+          list.style.textAlign = isTextPersian ? "right" : "left"; // Align text accordingly
+        });
+      }
     };
+    // Update direction when content changes
+    const handleUpdate = () => updateDirection();
     if (editor) {
-      editor.on("update", handleUpdate); // Listen for updates in the editor
+      editor.on("update", handleUpdate);
     }
     return () => {
       if (editor) {
-        editor.off("update", handleUpdate); // Clean up listener on unmount
+        editor.off("update", handleUpdate);
       }
     };
-  }, [editor, updateDirection]);
+  }, [editor]);
 
   return (
     <div className="parentEditor w-full flex flex-col bg-slate-300 rounded-lg">

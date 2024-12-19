@@ -1,5 +1,3 @@
-import { useRouter } from "next/navigation";
-
 export default function Card({
   title,
   post_title,
@@ -9,7 +7,7 @@ export default function Card({
 }) {
   const cardStyle =
     "p-3 flex flex-col gap-y-2 bg-slate-100 border border-slate-300 shadow-md rounded-lg text-sm";
-  const router = useRouter();
+  // const router = useRouter();
 
   return (
     <div
@@ -22,11 +20,11 @@ export default function Card({
             : "cursor-not-allowed"
         }
       `}
-      onClick={() =>
-        id && original_post_id == null
-          ? router.push(`edit?${new URLSearchParams({ id }).toString()}`)
-          : null
-      }
+      // onClick={() =>
+      //   id && original_post_id == null
+      //     ? router.push(`edit?${new URLSearchParams({ id }).toString()}`)
+      //     : null
+      // }
     >
       <h1 className="text-zinc-500 font-thin">{post_title}</h1>
       <div

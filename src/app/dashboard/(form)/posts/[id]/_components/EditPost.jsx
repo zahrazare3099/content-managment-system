@@ -1,20 +1,13 @@
 "use client";
 import { Input } from "@/app/_components/input/Input";
 import { Button } from "@/app/_components/button/Button";
-import useFetch from "@/hook/useFetch";
-import { useSearchParams } from "next/navigation";
-import EditPostElement from "./EditPostElement";
 import Loader from "@/app/_components/Loader";
 
-function EditPost() {
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
-  const { loading, singlePost } = useFetch({ key: id });
-
-  if (loading) return <Loader />;
+function EditPost({ post, children }) {
+  if (!post) return <Loader />;
   return (
     <>
-      {singlePost.map(
+      {post.map(
         (post) =>
           post.original_post_id ?? (
             <form
@@ -40,7 +33,7 @@ function EditPost() {
                 value={post.post_title}
                 onChange={() => console.log("not fix yet")}
               />
-              <EditPostElement />
+              {children}
               <hr />
               <div className="flex justify-center">
                 <Button type="edit" name="ویرایش" />

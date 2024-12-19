@@ -1,18 +1,7 @@
-"use client";
-import { useSearchParams } from "next/navigation";
-import ShowPostElements from "./ShowPostElements";
-import useFetch from "@/hook/useFetch";
-import Loader from "@/app/_components/Loader";
-
-function ShowPost() {
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
-  const { loading, singlePost } = useFetch({ key: id });
-
-  if (loading) return <Loader />;
+function ShowPost({ post, children }) {
   return (
     <div className="flex flex-col gap-y-2 text-sm">
-      {singlePost.map(
+      {post?.map(
         (post) =>
           post.original_post_id === null && (
             <div
@@ -34,7 +23,7 @@ function ShowPost() {
                 <p>{post.post_title ?? "_ _ _"}</p>
               </div>
               <hr />
-              <ShowPostElements />
+              {children}
             </div>
           )
       )}

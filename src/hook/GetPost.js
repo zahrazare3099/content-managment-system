@@ -9,23 +9,13 @@ const headers = {
 
 const BASE_URL = "https://vowvojtiieentuwelxkg.supabase.co/rest/v1/";
 
-export async function useGetPostElementsEnglish(postId) {
-  if (postId) {
-    const response = await fetch(`${BASE_URL}elements?post_id=eq.${postId}`, {
-      headers,
-    });
-    const elementsEng = await response.json();
-    return elementsEng;
-  } else return null;
-}
-
-export async function useGetPostElementsPersian(postId) {
+export default async function GetPost(postId) {
   if (postId) {
     const response = await fetch(
-      `${BASE_URL}elements?post_id=eq.${Number(postId) + 1}`,
+      `${BASE_URL}posts?or=(id.eq.${postId},original_post_id.eq.${postId})`,
       { headers }
     );
-    const elementsIr = await response.json();
-    return elementsIr;
+    const post = await response.json();
+    return post;
   } else return null;
 }

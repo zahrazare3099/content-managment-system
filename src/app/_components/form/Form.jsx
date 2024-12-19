@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
-import usePost from "@/hook/usePost";
+import CreatePost from "@/hook/CreatePost";
 
 const contentItems = [
   { type: "h1", label: "H1", id: "01" },
@@ -63,7 +63,7 @@ export const Form = () => {
     },
     mode: "onChange",
   });
-  const { createPost, creatElement } = usePost({ elementData, postData });
+  const { createPost, creatElement } = CreatePost({ elementData, postData });
   console.log(postData, elementData);
 
   // inputs from elements

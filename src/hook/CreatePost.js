@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const secret =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZvd3ZvanRpaWVlbnR1d2VseGtnIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczMTE1NjA5NCwiZXhwIjoyMDQ2NzMyMDk0fQ.Ak0z3Yth8fvqeI-elW-zh906yVgujmryIsWuCUZItoE";
@@ -16,9 +16,7 @@ const BASE_URL = "https://vowvojtiieentuwelxkg.supabase.co/rest/v1/";
 //   apiKey: process.env.API_SECRET_KEY,
 // };
 
-const usePost = ({ postData, elementData }) => {
-  const [data, setData] = useState([]);
-  const [loading, setloading] = useState(true);
+const CreatePost = ({ postData, elementData }) => {
   // create post
   const createPost = async (postData) => {
     if (postData) {
@@ -76,4 +74,4 @@ const usePost = ({ postData, elementData }) => {
   return { createPost, creatElement };
 };
 
-export default usePost;
+export default CreatePost;

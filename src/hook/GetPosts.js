@@ -9,13 +9,8 @@ const headers = {
 
 const BASE_URL = "https://vowvojtiieentuwelxkg.supabase.co/rest/v1/";
 
-export default async function useGetPosts(postId) {
-  if (postId) {
-    const response = await fetch(
-      `${BASE_URL}posts?or=(id.eq.${postId},original_post_id.eq.${postId})`,
-      { headers }
-    );
-    const post = await response.json();
-    return post;
-  } else return null;
+export default async function GetPosts() {
+  const response = await fetch(`${BASE_URL}posts`, { headers });
+  const posts = await response.json();
+  return posts;
 }

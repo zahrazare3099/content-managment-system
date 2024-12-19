@@ -179,6 +179,7 @@ export const Form = () => {
               render={({ field }) => (
                 <CustomInput
                   {...field}
+                  name={`elements.${index}.text`}
                   label={`محتوا برای تگ ${item.type}`}
                   error={errors.elements?.[index]?.text}
                 />

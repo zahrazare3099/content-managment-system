@@ -6,12 +6,11 @@ export default function Card({
   id,
 }) {
   const cardStyle =
-    "p-3 flex flex-col gap-y-2 bg-slate-100 border border-slate-300 shadow-md rounded-lg text-sm";
-  // const router = useRouter();
+    "p-3 flex flex-col justify-between gap-y-1 bg-slate-100 border border-slate-300 shadow-md rounded-lg text-sm";
 
   return (
     <div
-      className={`${cardStyle} ${
+      className={`${cardStyle} min-h-32 h-full ${
         original_post_id == null ? null : "text-end items-end"
       }
         ${
@@ -20,26 +19,21 @@ export default function Card({
             : "cursor-not-allowed"
         }
       `}
-      // onClick={() =>
-      //   id && original_post_id == null
-      //     ? router.push(`edit?${new URLSearchParams({ id }).toString()}`)
-      //     : null
-      // }
     >
-      <h1 className="text-zinc-500 font-thin">{post_title}</h1>
+      <h1 className="text-slate-600 font-bold">{post_title ?? "--"}</h1>
       <div
-        className={`text-slate-600 font-bold ${
+        className={`text-zinc-500 font-thin ${
           original_post_id !== null ? "" : null
         }`}
       >
-        <p>
+        <p className="font-bold">
           {original_post_id
             ? pre_title
               ? `: ${pre_title?.slice(0, -1)}`
               : null
             : pre_title}
         </p>
-        <p>{title}</p>
+        <p>{title ?? "--"}</p>
       </div>
     </div>
   );

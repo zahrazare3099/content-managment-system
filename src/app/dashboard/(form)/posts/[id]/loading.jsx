@@ -9,25 +9,25 @@ export default function Loading() {
           key={i}
           className="p-3 h-full w-full flex flex-col justify-between gap-y-3"
         >
-          <div className="p-3 flex flex-col justify-between gap-y-3 bg-slate-100 border border-slate-300 shadow-md rounded-lg">
+          <div className="p-3 flex flex-col justify-between gap-y-3">
             <Skeleton className="bg-slate-400 w-10" />
             <Skeleton className="bg-slate-300 w-full" />
             <Skeleton className="bg-slate-300 w-full" />
             <Skeleton className="bg-slate-300 w-full" />
           </div>
-          <div className="p-3 flex flex-col justify-between gap-y-3 bg-slate-100 border border-slate-300 shadow-md rounded-lg">
+          <div className="p-3 flex flex-col justify-between gap-y-3">
             <Skeleton className="bg-slate-400 w-10" />
             <Skeleton className="bg-slate-300 w-full" />
             <Skeleton className="bg-slate-300 w-full" />
             <Skeleton className="bg-slate-300 w-full" />
           </div>
-          <div className="p-3 flex flex-col justify-between gap-y-3 bg-slate-100 border border-slate-300 shadow-md rounded-lg">
+          <div className="p-3 flex flex-col justify-between gap-y-3">
             <Skeleton className="bg-slate-400 w-10" />
             <Skeleton className="bg-slate-300 w-full" />
             <Skeleton className="bg-slate-300 w-full" />
             <Skeleton className="bg-slate-300 w-full" />
           </div>
-          <div className="p-3 flex flex-col justify-between gap-y-3 bg-slate-100 border border-slate-300 shadow-md rounded-lg">
+          <div className="p-3 flex flex-col justify-between gap-y-3">
             <Skeleton className="bg-slate-400 w-10" />
             <Skeleton className="bg-slate-300 w-full" />
             <Skeleton className="bg-slate-300 w-full" />

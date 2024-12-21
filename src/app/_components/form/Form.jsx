@@ -196,7 +196,7 @@ export const Form = () => {
         ))}
         <Button
           type="submit"
-          name={isSubmitting ? "Submitting..." : "Submit"}
+          name={isSubmitting ? "در حال ارسال..." : "ارسال"}
           disabled={isSubmitting}
         />
       </form>

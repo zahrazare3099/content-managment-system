@@ -14,12 +14,12 @@ async function EditPage({ params }) {
 
   return (
     <>
-      <ShowPost post={post}>
-        <ShowPostElements elements={elementsEng} />
-      </ShowPost>
       <EditPost post={post}>
         <EditPostElement elements={elementsIr} />
       </EditPost>
+      <ShowPost post={post}>
+        <ShowPostElements elements={elementsEng} />
+      </ShowPost>
     </>
   );
 }

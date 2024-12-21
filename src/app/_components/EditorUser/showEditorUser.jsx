@@ -13,8 +13,8 @@ export const ShowEditorUser = () => {
         />
       </div>
       <div className="flex flex-col py-1 px-2">
-        <span className="text-sm text-slate-600 flex w-24">Nikol kidman</span>
-        <span className="text-xs text-slate-500">Editor</span>
+        <span className="text-sm text-slate-600 flex w-24">محمد پور</span>
+        <span className="text-xs text-slate-500">ادیتور</span>
       </div>
     </div>
   );

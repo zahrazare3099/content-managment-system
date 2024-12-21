@@ -8,7 +8,9 @@ const DynamicTag = ({ type, children }) => {
     console.error(`Invalid tag type: ${type}`);
     return null;
   }
-  return <Tag>{children}</Tag>;
+  return (
+    <Tag className="bg-slate-100 p-2 shadow-md rounded-lg">{children}</Tag>
+  );
 };
 
 export default DynamicTag;

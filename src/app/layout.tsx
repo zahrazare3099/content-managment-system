@@ -59,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" dir="ltr">
+    <html lang="en" dir="rtl">
       <body
         className={`min-h-screen flex bg-slate-200 ${yekanbakh.variable} ${figtree.variable} antialiased`}
       >

@@ -1,6 +1,6 @@
 function ShowPost({ post, children }) {
   return (
-    <div className="flex flex-col gap-y-2 text-sm">
+    <div className="w-full flex flex-col gap-y-2 text-sm">
       {post?.map(
         (post) =>
           post.original_post_id === null && (

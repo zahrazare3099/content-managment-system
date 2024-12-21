@@ -6,18 +6,14 @@ export default function Card({
   id,
 }) {
   const cardStyle =
-    "p-3 flex flex-col justify-between gap-y-1 bg-slate-100 border border-slate-300 shadow-md rounded-lg text-sm";
+    "border border-slate-300 p-3 flex flex-col justify-between gap-y-1 bg-slate-100 shadow-md rounded-lg text-sm";
 
   return (
     <div
       className={`${cardStyle} min-h-32 h-full ${
         original_post_id == null ? null : "text-end items-end"
       }
-        ${
-          id && original_post_id == null
-            ? "cursor-pointer"
-            : "cursor-not-allowed"
-        }
+        ${id && original_post_id ? "cursor-not-allowed" : "cursor-pointer"}
       `}
     >
       <h1 className="text-slate-600 font-bold">{post_title ?? "--"}</h1>

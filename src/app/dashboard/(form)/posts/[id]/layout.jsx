@@ -1,12 +1,12 @@
-import GetPost from "@/hook/GetPost";
-import Loader from "@/app/_components/Loader";
+import { Suspense } from "react";
+import Loading from "./loading";
 
-const Layout = async ({ params, children }) => {
-  const { id } = await params;
-  const post = await GetPost(id);
-
-  if (!post.length) return <Loader />;
-  return <div className="grid grid-cols-2 gap-4 px-2 py-3">{children}</div>;
+const Layout = ({ children }) => {
+  return (
+    <div className="min-w-full grid grid-cols-2 gap-4 px-2 py-3">
+      <Suspense fallback={<Loading />}> {children}</Suspense>
+    </div>
+  );
 };
 
 export default Layout;

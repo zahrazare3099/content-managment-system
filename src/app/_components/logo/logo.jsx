@@ -1,8 +1,14 @@
+import Image from "next/image";
+
 export const Logo = () => {
   return (
-    <div className="p-2 text-white flex flex-col items-center border border-slate-200">
-      <span className="text-center text-xs text-nowrap">LOGO</span>
-      <span className="text-center text-xs text-nowrap">LOGO NAME</span>
+    <div className="flex flex-col items-center">
+      <Image
+        src="/images/logoTh.jpg"
+        alt="logoInMenu"
+        width={100}
+        height={75}
+      />
     </div>
   );
 };

@@ -2,10 +2,10 @@ import "react-loading-skeleton/dist/skeleton.css";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import localFont from "next/font/local";
-import { Header } from "./_components/header";
 import { Sidebar } from "./_components/sidebar";
 import "./globals.css";
-
+import { Header } from "./_components/header";
+import ToastProvider from "./_components/ToastProvider";
 const figtree = Figtree({
   display: "swap",
   subsets: ["latin"],
@@ -61,13 +61,15 @@ export default function RootLayout({
   return (
     <html lang="en" dir="rtl">
       <body
-        className={`min-h-screen flex bg-slate-200 ${yekanbakh.variable} ${figtree.variable} antialiased`}
+        className={`h-screen w-full flex flex-col bg-slate-200 ${yekanbakh.variable} ${figtree.variable} antialiased`}
       >
-        <Sidebar />
-        <div className="flex flex-col w-full">
+        <ToastProvider>
           <Header />
-          <main className="">{children}</main>
-        </div>
+          <main className="flex h-screen">
+            <Sidebar />
+            {children}
+          </main>
+        </ToastProvider>
       </body>
     </html>
   );

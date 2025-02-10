@@ -1,4 +1,4 @@
-import Loader from "../Loader";
+import Loader from "@/components/loader/Loader";
 
 export const Button = ({ name, type = "submit", clickButtonHandler }) => {
   return (

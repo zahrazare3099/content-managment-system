@@ -1,9 +1,9 @@
 import { GetPostElementsEnglish } from "@/hook/GetPostElements";
 import GetPost from "@/hook/GetPost";
-import ShowPost from "./_components/ShowPost";
-import ShowPostElements from "./_components/ShowPostElements";
-import EditPost from "./_components/EditPost";
-import EditPostElement from "./_components/EditPostElement";
+import ShowPost from "@/components/ShowPost";
+import ShowPostElements from "@/components/ShowPostElements";
+import EditPost from "@/components/EditPost";
+import EditPostElement from "@/components/EditPostElement";
 import { GetPostElementsPersian } from "@/hook/GetPostElements";
 
 async function EditPage({ params }) {

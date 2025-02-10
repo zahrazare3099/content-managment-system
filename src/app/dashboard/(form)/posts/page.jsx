@@ -1,8 +1,8 @@
-import Card from "@/app/_components/card/Card";
+import Card from "@/components/card/Card";
 import GetPosts from "@/hook/GetPosts";
 import Link from "next/link";
 import { Suspense } from "react";
-import Loading from "./loading";
+import Loading from "@/components/loader/Loader";
 
 export default async function ShowInRaw() {
   let posts = await GetPosts();

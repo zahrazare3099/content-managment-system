@@ -2,10 +2,10 @@ import "react-loading-skeleton/dist/skeleton.css";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import localFont from "next/font/local";
-import { Sidebar } from "./_components/sidebar";
+import { Sidebar } from "@/components/sidebar";
 import "./globals.css";
-import { Header } from "./_components/header";
-import ToastProvider from "./_components/ToastProvider";
+import { Header } from "@/components/header";
+import ToastProvider from "@/components/toaster/ToastProvider";
 const figtree = Figtree({
   display: "swap",
   subsets: ["latin"],

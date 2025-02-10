@@ -1,6 +1,6 @@
 "use client";
-import { Input } from "@/app/_components/input/Input";
-import { Button } from "@/app/_components/button/Button";
+import { Input } from "@/components/input/Input";
+import { Button } from "@/components/button/Button";
 
 function EditPost({ post, children }) {
   return (

@@ -1,5 +1,5 @@
 "use client";
-import { EditorComponent } from "@/app/_components/Editor";
+import { EditorComponent } from "@/components/Editor";
 
 const EditPostElement = ({ elements }) => {
   return elements.map(

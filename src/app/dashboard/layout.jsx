@@ -1,5 +1,5 @@
-import { SelectedTab } from "../_components/selectedTab";
-import { ShowEditorUser } from "../_components/EditorUser";
+import { SelectedTab } from "@/components/selectedTab";
+import { ShowEditorUser } from "@/components/EditorUser";
 
 async function Layout({ children }) {
   return (

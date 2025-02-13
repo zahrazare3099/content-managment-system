@@ -16,15 +16,15 @@ export const Button = ({
     <button
       disabled={loading}
       type="submit"
-      className={`w-full text-sm text-nowrap h-10 ${
+      className={`w-full mt-2 text-sm text-nowrap h-10 ${
         styleType == "submit"
-          ? "bg-indigo-700 w-9/12 my-4 py-2 text-white font-bold rounded-xl"
+          ? "bg-indigo-700 w-9/12 py-2 text-white font-bold rounded-xl"
           : styleType == "edit"
-          ? "bg-blue-600 w-9/12 my-4 py-2 text-white font-bold rounded-xl"
+          ? "bg-blue-600 w-9/12 py-2 text-white font-bold rounded-xl"
           : styleType == "delete"
-          ? "bg-red-600 w-9/12 my-4 py-2 text-white font-bold rounded-xl"
+          ? "bg-red-600 w-9/12 py-2 text-white font-bold rounded-xl"
           : styleType == "loading"
-          ? "bg-orange-400  w-9/12 my-4 py-2 text-white font-bold rounded-xl"
+          ? "bg-orange-400  w-9/12 py-2 text-white font-bold rounded-xl"
           : styleType == "editor"
           ? "text-slate-700 text-xs font-thin p-1 min-w-6 flex justify-center items-center hover:bg-slate-300 rounded-lg"
           : null

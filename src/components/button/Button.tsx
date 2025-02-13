@@ -1,25 +1,37 @@
 import Loader from "@/components/loader/Loader";
 
-export const Button = ({ name, type = "submit", clickButtonHandler }) => {
+type ButtonPropsType = {
+  name: string;
+  styleType: "submit" | "edit" | "loading" | "delete";
+  clickButtonHandler?: () => void;
+  loading?: boolean;
+};
+export const Button = ({
+  name,
+  clickButtonHandler,
+  loading,
+  styleType = "submit",
+}: ButtonPropsType) => {
   return (
     <button
-      type={type}
-      className={` ${
-        type == "submit"
+      disabled={loading}
+      type="submit"
+      className={`w-full text-sm text-nowrap h-10 ${
+        styleType == "submit"
           ? "bg-indigo-700 w-9/12 my-4 py-2 text-white font-bold rounded-xl"
-          : type == "edit"
+          : styleType == "edit"
           ? "bg-blue-600 w-9/12 my-4 py-2 text-white font-bold rounded-xl"
-          : type == "delete"
+          : styleType == "delete"
           ? "bg-red-600 w-9/12 my-4 py-2 text-white font-bold rounded-xl"
-          : type == "loading"
+          : styleType == "loading"
           ? "bg-orange-400  w-9/12 my-4 py-2 text-white font-bold rounded-xl"
-          : type == "editor"
+          : styleType == "editor"
           ? "text-slate-700 text-xs font-thin p-1 min-w-6 flex justify-center items-center hover:bg-slate-300 rounded-lg"
           : null
       }    `}
       onClick={clickButtonHandler}
     >
-      {type == "loading" ? <Loader /> : null} {name}
+      {loading ? <Loader /> : name}
     </button>
   );
 };

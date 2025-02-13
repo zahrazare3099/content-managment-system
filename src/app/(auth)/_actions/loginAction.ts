@@ -21,6 +21,25 @@ export default async function loginAction(formData: FormData) {
   }
 
   // TODO: create a user instance in user_profiles tabel
+  const { data: exitingUser } = await supabase
+    .from("user_profiles")
+    .select("*")
+    .eq("email", credentials?.email)
+    .limit(1)
+    .single();
+
+  if (!exitingUser) {
+    const { error: insertError } = await supabase.from("user_profiles").insert({
+      email: data?.user.email,
+      username: data?.user?.user_metadata?.username,
+    });
+    if (insertError) {
+      return {
+        status: insertError?.message,
+        user: null,
+      };
+    }
+  }
 
   revalidatePath("/", "layout");
   return { status: "success", user: data.user };

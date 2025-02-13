@@ -6,7 +6,6 @@ import loginAction from "../_actions/loginAction";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-// TODO: fix bug in invalid credential
 export default function LoginForm() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
@@ -26,7 +25,12 @@ export default function LoginForm() {
       } else {
         const result = await loginAction(formData);
         if (result.status !== "success") {
-          throw new Error(result.status);
+          // if (result.status === "Invalid login credentials") {
+          //   return setErrorMessage("این حساب کاربری وجود ندارد.");
+          // } else {
+          //   throw new Error(result.status);
+          // }
+          return setErrorMessage(result.status);
         }
         toast.success("شما با موفقیت وارد حساب کاربری خود شدید.");
         router.push("/");
@@ -68,11 +72,8 @@ export default function LoginForm() {
       </div>
 
       <Button styleType="submit" name="ورود" loading={loading} />
-
       {errorMessage !== null ? (
-        <span className="text-red-500 font-bold text-sm pb-3">
-          {errorMessage}*
-        </span>
+        <span className="text-red-500 font-bold text-sm">{errorMessage}*</span>
       ) : null}
     </form>
   );

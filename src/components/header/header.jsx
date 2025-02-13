@@ -1,5 +1,6 @@
 import LogoutButton from "@/app/(auth)/_components/LogoutButton";
 import { createClient } from "@/utiles/supabase/server";
+import Image from "next/image";
 import Link from "next/link";
 
 export async function Header() {
@@ -8,16 +9,35 @@ export async function Header() {
     data: { user },
   } = await supabase.auth.getUser();
   return (
-    <div className="bg-slate-300 w-full p-3 px-5 flex flex-row-reverse">
-      <span>
-        {user ? (
-          <LogoutButton />
-        ) : (
-          <Link href="/login" className="hover:text-blue-500">
-            👤 ورود به حساب کاربری
-          </Link>
-        )}
-      </span>
+    <div className="bg-slate-300 w-full p-3 px-5 flex justify-between items-center">
+      {user ? (
+        <span className="w-52 flex items-center gap-3 text-xs font-sans">
+          <Image
+            width={50}
+            height={50}
+            src={user?.user_metadata?.avatar_url}
+            alt="user profile picture"
+            className="aspect-square rounded-full"
+          />
+          <div className="flex flex-col flex-1">
+            <p>
+              {user?.user_metadata?.username || user?.user_metadata?.full_name}،
+              خوش آمدید
+            </p>
+          </div>
+        </span>
+      ) : null}
+
+      {user ? (
+        <LogoutButton />
+      ) : (
+        <Link
+          href="/login"
+          className="flex justify-end text-indigo-600 hover:text-indigo-700 text-xs w-full text-start text-nowrap font-sans"
+        >
+          [→ ورود به حساب کاربری
+        </Link>
+      )}
     </div>
   );
 }

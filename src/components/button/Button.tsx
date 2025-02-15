@@ -16,7 +16,7 @@ export const Button = ({
     <button
       disabled={loading}
       type="submit"
-      className={`w-full mt-2 text-sm text-nowrap h-10 ${
+      className={`w-full mt-2 text-sm text-nowrap ${
         styleType == "submit"
           ? "bg-indigo-700 w-9/12 py-2 text-white font-bold rounded-xl"
           : styleType == "edit"

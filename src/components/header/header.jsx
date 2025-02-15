@@ -2,6 +2,7 @@ import LogoutButton from "@/app/(auth)/_components/LogoutButton";
 import { createClient } from "@/utiles/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
+import userProfile from "../../../public/images/user.png";
 
 export async function Header() {
   const supabase = await createClient();
@@ -13,14 +14,15 @@ export async function Header() {
       {user ? (
         <span className="w-52 flex items-center gap-3 text-xs font-sans">
           <Image
-            width={50}
-            height={50}
-            src={user?.user_metadata?.avatar_url}
+            width={35}
+            height={35}
+            src={user?.user_metadata?.avatar_url || userProfile}
             alt="user profile picture"
             className="aspect-square rounded-full"
           />
           <div className="flex flex-col flex-1">
             <p>
+              کاربر&nbsp;
               {user?.user_metadata?.username || user?.user_metadata?.full_name}،
               خوش آمدید
             </p>

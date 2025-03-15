@@ -2,9 +2,9 @@
 
 export default function ErrorPage({ error }: { error: Error }) {
   return (
-    <div className="w-full flex flex-col justify-center  gap-y-4">
+    <div className="w-full text-red-500 flex flex-col justify-center items-center gap-y-4">
       <p>Sorry, something went wrong</p>
-      <p className="text-red-500 font-bold">{error.message}</p>
+      <p>{error?.message}</p>
     </div>
   );
 }
